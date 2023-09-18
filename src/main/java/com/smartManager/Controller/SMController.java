@@ -30,6 +30,7 @@ public class SMController {
 	public ModelAndView loginFormValidation(@Valid @ModelAttribute("loginData") SMEntity smEntity, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		
+		
 		if(bindingResult.hasErrors()) {
 			 modelAndView.setViewName("SMLoginForm");
 			 return modelAndView;

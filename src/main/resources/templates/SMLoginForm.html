@@ -1,0 +1,58 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Smart Manager Login</title>
+</head>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<body>
+		<div class="container">
+		<div class="row">
+			<div class="col  m6 offset-m3">
+				<div class="card">
+					<div class="card-content">
+						<div class="form center-align">
+						
+							<form  th:action="@{/process}" method="post" id="loginForm" th:object="${loginData}">
+								<table>
+									<tr>
+										<td>UserName:</td>
+										<td><input type="text" name="userName" th:value="${loginData.userName}" th:classappend="${#fields.hasErrors()?'is-invalid':''}"></td>
+										<td>
+											<div class="invalid-feedback" th:each="e:${#fields.errors('userName')}" th:text="${e}" style="color: red;">
+											</div></td>
+											
+										
+									</tr>
+
+									<tr>
+										<td>Password:</td>
+										<td><input type="password" name="password" th:value="${loginData.password}" th:classappend="${#fields.hasErrors()?'is-invalid':''}"></td>
+										<td><div class="invalid-feedback" th:each="e:${#fields.errors('password')}" th:text="${e}" style="color: red;">
+											</div></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><button type="submit" class="btn  purple accent-4" >Submit</button></td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

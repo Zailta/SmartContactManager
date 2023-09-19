@@ -25,7 +25,7 @@ public class SMUserEntity {
 	private Boolean enabledStatus;
 	private String profilePicture;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "")
 	private List <SMContactEntity> contacts = new ArrayList<>();
 	
 	public String getUserID() {

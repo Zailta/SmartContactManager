@@ -21,7 +21,7 @@ public class SMContactEntity {
 	private String profilePicture;
 	
 	@ManyToOne
-	private SMUserEntity User;
+	private SMUserEntity user;
 	public String getContactID() {
 		return contactID;
 	}
@@ -77,10 +77,10 @@ public class SMContactEntity {
 		this.profilePicture = profilePicture;
 	}
 	public SMUserEntity getUser() {
-		return User;
+		return user;
 	}
 	public void setUser(SMUserEntity user) {
-		User = user;
+		this.user = user;
 	}
 	
 	

@@ -15,8 +15,14 @@ import jakarta.validation.Valid;
 @RestController
 public class SMController {
 	
+	//View Openers:
+	@GetMapping(value = "/home")
+	public ModelAndView openHomePage(ModelAndView modelAndView) {
+		modelAndView.setViewName("SMHome");
+		return modelAndView;
+	}
 	
-	
+	//Execution Commands:
 	@GetMapping(value = "/SMLogin")
 	public ModelAndView openLoginForm(ModelAndView modelAndView) {
 		
@@ -25,7 +31,6 @@ public class SMController {
 		modelAndView.setViewName("SMLoginForm");
 		return modelAndView;
 	}
-	
 	@PostMapping(value = "/process")
 	public ModelAndView loginFormValidation(@Valid @ModelAttribute("loginData") SMEntity smEntity, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();

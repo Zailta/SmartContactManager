@@ -18,6 +18,7 @@ public class SMController {
 	//View Openers:
 	@GetMapping(value = "/home")
 	public ModelAndView openHomePage(ModelAndView modelAndView) {
+		modelAndView.addObject("title", "Home - Smart Contact Manager");
 		modelAndView.setViewName("SMHome");
 		return modelAndView;
 	}

@@ -28,11 +28,31 @@ public class SMController {
 	/*
 	 * View Openers: launch SignUp Page
 	 */
-	
+	@GetMapping(value = "/signup")
+	public ModelAndView openSignUpPage(ModelAndView modelAndView) {
+		modelAndView.addObject("title", "Sign UP - Smart Contact Manager");
+		modelAndView.setViewName("SMHome");
+		return modelAndView;
+	}
 	
 	/*
 	 * View Openers: launch About Page
 	 */
+	@GetMapping(value = "/about")
+	public ModelAndView openaboutPage(ModelAndView modelAndView) {
+		modelAndView.addObject("title", "About - Smart Contact Manager");
+		modelAndView.setViewName("SMHome");
+		return modelAndView;
+	}
+	/*
+	 * View Openers: launch Login Page
+	 */
+	@GetMapping(value = "/login")
+	public ModelAndView openloginPage(ModelAndView modelAndView) {
+		modelAndView.addObject("title", "Login - Smart Contact Manager");
+		modelAndView.setViewName("SMHome");
+		return modelAndView;
+	}
 	
 	//Execution Commands:
 	@GetMapping(value = "/SMLogin")

@@ -15,13 +15,24 @@ import jakarta.validation.Valid;
 @RestController
 public class SMController {
 	
-	//View Openers:
-	@GetMapping(value = "/home")
+	/*
+	 * View Openers: launch Home Page
+	 */
+	@GetMapping(value = "/")
 	public ModelAndView openHomePage(ModelAndView modelAndView) {
 		modelAndView.addObject("title", "Home - Smart Contact Manager");
 		modelAndView.setViewName("SMHome");
 		return modelAndView;
 	}
+	
+	/*
+	 * View Openers: launch SignUp Page
+	 */
+	
+	
+	/*
+	 * View Openers: launch About Page
+	 */
 	
 	//Execution Commands:
 	@GetMapping(value = "/SMLogin")

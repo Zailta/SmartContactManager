@@ -31,7 +31,7 @@ public class SMController {
 	@GetMapping(value = "/signup")
 	public ModelAndView openSignUpPage(ModelAndView modelAndView) {
 		modelAndView.addObject("title", "Sign UP - Smart Contact Manager");
-		modelAndView.setViewName("SMHome");
+		modelAndView.setViewName("SMSignUp");
 		return modelAndView;
 	}
 	
@@ -41,7 +41,7 @@ public class SMController {
 	@GetMapping(value = "/about")
 	public ModelAndView openaboutPage(ModelAndView modelAndView) {
 		modelAndView.addObject("title", "About - Smart Contact Manager");
-		modelAndView.setViewName("SMHome");
+		modelAndView.setViewName("SMAbout");
 		return modelAndView;
 	}
 	/*
@@ -50,7 +50,7 @@ public class SMController {
 	@GetMapping(value = "/login")
 	public ModelAndView openloginPage(ModelAndView modelAndView) {
 		modelAndView.addObject("title", "Login - Smart Contact Manager");
-		modelAndView.setViewName("SMHome");
+		modelAndView.setViewName("SMLogin");
 		return modelAndView;
 	}
 	

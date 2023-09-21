@@ -12,3 +12,7 @@ body{
 .btn-bg-primary{
 	background: #ff6e6c !important ;
 }
+.my-card{
+	padding: 20px;
+	background: #FFFFFF;
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="SMBase::layout(~{::section})">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="my-card">
+						<h3 class="text-center display-4">Register Here!</h3>
+						<form th:action="@{/register}" method="POST" id="addnewuserForm">
+							<!--for Name-->
+							<div class="form-group">
+								<label for="name">Name:</label>
+								<input type="text" class="form-control" id="name" aria-describedby="emailHelp"
+									placeholder="Enter Name" required>
+							</div>
+							<!--for Email-->
+							<div class="form-group">
+								<label for="email">Email address:</label>
+								<input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+									placeholder="Enter email" required>
+								<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+							</div>
+							<!--for Password-->
+							<div class="form-group">
+								<label for="exampleInputEmail1">Password:</label>
+								<input type="password" class="form-control" id="password" aria-describedby="emailHelp"
+									placeholder="Enter password" required>
+								<small id="emailHelp" class="form-text text-muted">Please enter password in following format: Qwert#@1</small>
+							</div>
+							<!--for About-->
+							<div class="form-group">
+								<textarea name="about" id="about" cols="30" rows="5" class="form-control" required></textarea>
+								<small id="emailHelp" class="form-text text-muted">Write a small description about Yourself</small>
+							</div>
+							<div class="container">
+							<button class="btn btn-primary">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+
+</html>

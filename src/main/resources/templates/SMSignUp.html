@@ -12,6 +12,10 @@
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
 					<div class="my-card">
+						<div class="container text-center">
+							<img style="width: 80px;" th:src="@{/img/feedback.png}" alt="" />
+						</div>
+						
 						<h3 class="text-center display-4">Register Here!</h3>
 						<form th:action="@{/register}" method="POST" id="addnewuserForm">
 							<!--for Name-->
@@ -39,8 +43,9 @@
 								<textarea name="about" id="about" cols="30" rows="5" class="form-control" required></textarea>
 								<small id="emailHelp" class="form-text text-muted">Write a small description about Yourself</small>
 							</div>
-							<div class="container">
-							<button class="btn btn-primary">Submit</button>
+							<div class="container text-center" >
+							<button type="submit" class="btn btnbg-primary">Submit</button>
+							<button type="reset"class="btn btnbg-tertiary">Reset</button>
 							</div>
 						</form>
 					</div>

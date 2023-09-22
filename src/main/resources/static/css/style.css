@@ -9,9 +9,13 @@ body{
 	height: 93vh;
 	background-size: cover;
 }
-.btn-bg-primary{
+.btnbg-primary{
 	background: #ff6e6c !important ;
 }
+.btnbg-tertiary{
+	background: #fbdd74 !important ;
+}
+
 .my-card{
 	padding: 20px;
 	background: #FFFFFF;

@@ -30,6 +30,7 @@ public class SMController {
 	 */
 	@GetMapping(value = "/signup")
 	public ModelAndView openSignUpPage(ModelAndView modelAndView) {
+		modelAndView.addObject("user", new SMEntity());
 		modelAndView.addObject("title", "Sign UP - Smart Contact Manager");
 		modelAndView.setViewName("SMSignUp");
 		return modelAndView;

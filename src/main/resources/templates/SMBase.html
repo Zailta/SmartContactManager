@@ -49,10 +49,11 @@
   </div>
 </nav>
 <!-- Nav Bar changes End-->
-		<div th:if="session.message" th:classappend="session.message.type" class="alert alert-success" role="alert">
-		<p th:text="${session.message.content}"></p>
-		</div>
-		<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert alert-success" role="alert">
+			<p th:text="${session.message.content}"></p>
+			<!--<th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
+</div>
+		
 	  <div th:replace="${content}"></div>  
     
     

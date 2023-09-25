@@ -67,10 +67,15 @@ public class SMController {
 	public ModelAndView loginFormValidation(@Valid @ModelAttribute("user") SMUserEntity smUserEntity,BindingResult bindingResult, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
+			if(session.getAttribute("message")!=null)
+				session.removeAttribute("message");
 
 			if (bindingResult.hasErrors()) {
 				modelAndView.setViewName("SMSignUp");
 				return modelAndView;
+			}
+			if(smUserEntity.getName().equalsIgnoreCase("abc")) {
+				throw new Exception("namce cannot be abc");
 			}
 			smUserEntity.setRole("ROLE_USER");
 			smUserEntity.setEnabledStatus(true);
@@ -82,9 +87,11 @@ public class SMController {
 			return modelAndView;
 		} catch (Exception e) {
 			modelAndView.addObject("user", new SMUserEntity());
-			session.setAttribute("message", new SMMessageHandler("Something went wrong: "+e.getMessage().toString(), "alert-error"));
+			session.setAttribute("message", new SMMessageHandler("Something went wrong: "+e.getMessage().toString(), "alert-danger"));
+			modelAndView.setViewName("SMSignUp");
+			return modelAndView;
 		}
-		return modelAndView;
+		
 
 	}
 	

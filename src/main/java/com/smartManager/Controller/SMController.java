@@ -1,5 +1,6 @@
 package com.smartManager.Controller;
 
+import org.aspectj.bridge.MessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.smartManager.DAO.SMUserRepository;
 import com.smartManager.Entity.SMUserEntity;
+import com.smartManager.Helper.SMMessageHandler;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @RestController
@@ -61,21 +64,29 @@ public class SMController {
 	//Execution Commands:
 	
 	@PostMapping(value = "/register")
-	public ModelAndView loginFormValidation(@Valid @ModelAttribute("user") SMUserEntity smUserEntity, BindingResult bindingResult) {
+	public ModelAndView loginFormValidation(@Valid @ModelAttribute("user") SMUserEntity smUserEntity,BindingResult bindingResult, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
-		if(bindingResult.hasErrors()) {
-			 modelAndView.setViewName("SMSignUp");
-			 return modelAndView;
+		try {
+
+			if (bindingResult.hasErrors()) {
+				modelAndView.setViewName("SMSignUp");
+				return modelAndView;
+			}
+			smUserEntity.setRole("ROLE_USER");
+			smUserEntity.setEnabledStatus(true);
+			SMUserEntity savedResultSet = smUserRepository.save(smUserEntity);
+			System.out.println(savedResultSet);
+			modelAndView.addObject("user", new SMUserEntity());
+			modelAndView.setViewName("SMSignUp");
+			session.setAttribute("message", new SMMessageHandler("User Added Succesfully! ", "alert-success"));
+			return modelAndView;
+		} catch (Exception e) {
+			modelAndView.addObject("user", new SMUserEntity());
+			session.setAttribute("message", new SMMessageHandler("Something went wrong: "+e.getMessage().toString(), "alert-error"));
 		}
-		smUserEntity.setRole("ROLE_USER");
-		SMUserEntity savedResultSet = smUserRepository.save(smUserEntity);
-		modelAndView.addObject("user", savedResultSet);
-		System.out.println(savedResultSet);
-		
-		 modelAndView.setViewName("SMSignUp");
 		return modelAndView;
+
 	}
-	
 	
 
 }

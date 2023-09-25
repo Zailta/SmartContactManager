@@ -1,5 +1,6 @@
 package com.smartManager.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -7,12 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.smartManager.DAO.SMUserRepository;
 import com.smartManager.Entity.SMUserEntity;
 
 import jakarta.validation.Valid;
 
 @RestController
 public class SMController {
+	@Autowired
+	private SMUserRepository smUserRepository;
 	
 	/*
 	 * View Openers: launch Home Page
@@ -63,8 +67,12 @@ public class SMController {
 			 modelAndView.setViewName("SMSignUp");
 			 return modelAndView;
 		}
+		smUserEntity.setRole("ROLE_USER");
+		SMUserEntity savedResultSet = smUserRepository.save(smUserEntity);
+		modelAndView.addObject("user", savedResultSet);
+		System.out.println(savedResultSet);
 		
-		
+		 modelAndView.setViewName("SMSignUp");
 		return modelAndView;
 	}
 	

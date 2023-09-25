@@ -2,14 +2,14 @@ package com.smartManager.Entity;
 
 import java.util.*;
 
+import org.hibernate.annotations.UuidGenerator;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Min;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
@@ -18,7 +18,7 @@ import jakarta.validation.constraints.Pattern;
 public class SMUserEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@UuidGenerator
 	private String userID;
 	@NotEmpty(message = "Email must not be Empty")
 	private String email;
@@ -27,7 +27,6 @@ public class SMUserEntity {
 	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "The password should be in following format: .Qwerty1 ")
 	private String password;
 	@NotEmpty(message = "About must not be Empty")
-	@Min(value = 50, message = "Please enter atleast 50 characters")
 	private String about;
 	private String role;
 	private Boolean enabledStatus;

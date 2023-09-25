@@ -9,6 +9,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 
 @Entity
@@ -17,9 +20,14 @@ public class SMUserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String userID;
+	@NotEmpty(message = "Email must not be Empty")
 	private String email;
+	@NotEmpty(message = "Name must not be Empty")
 	private String name;
+	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "The password should be in following format: .Qwerty1 ")
 	private String password;
+	@NotEmpty(message = "About must not be Empty")
+	@Min(value = 50, message = "Please enter atleast 50 characters")
 	private String about;
 	private String role;
 	private Boolean enabledStatus;

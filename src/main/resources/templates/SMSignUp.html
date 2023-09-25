@@ -17,12 +17,12 @@
 						</div>
 						
 						<h3 class="text-center display-4">Register Here!</h3>
-						<form th:action="@{/register}" method="POST" id="addnewuserForm" th:object="user">
+						<form th:action="@{/register}" method="POST" id="addnewuserForm" th:object="${user}">
 							<!--for Name-->
-							<div class="form-group" th:classappend="${#fields.hasErrors()?'is-invalid':''}">
+							<div class="form-group">
 								<label for="name">Name:</label>
 								<input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp"
-									placeholder="Enter Name" th:value="${user.name}" valrequired>
+									placeholder="Enter Name" th:value="${user.name}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
 									<div class="invalid-feedback" th:each="e:${#fields.errors('name')}" th:text="${e}" style="color: red;">
 											</div>
 							</div>
@@ -30,7 +30,7 @@
 							<div class="form-group">
 								<label for="email">Email address:</label>
 								<input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
-									placeholder="Enter email" th:value="${user.email}"required>
+									placeholder="Enter email" th:value="${user.email}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
 								<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 								<div class="invalid-feedback" th:each="e:${#fields.errors('email')}" th:text="${e}" style="color: red;"></div>
 							</div>
@@ -38,15 +38,15 @@
 							<div class="form-group">
 								<label for="exampleInputEmail1">Password:</label>
 								<input type="password" class="form-control" name="password" id="password" aria-describedby="emailHelp"
-									placeholder="Enter password" th:value="${user.password}" required>
+									placeholder="Enter password" th:value="${user.password}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
 								<small id="emailHelp" class="form-text text-muted">Please enter password in following format: Qwert#@1</small>
-								<div class="invalid-feedback" th:each="e:${fields.errors('password')}" th:text="${e}" style="color: red;"></div>
+								<div class="invalid-feedback" th:each="e:${#fields.errors('password')}" th:text="${e}" style="color: red;"></div>
 							</div>
 							<!--for About-->
 							<div class="form-group">
-								<textarea name="about" name="about" id="about" cols="30" rows="5" class="form-control" th:value="${user.about}"required></textarea>
+								<textarea name="about" id="about" cols="30" rows="5" class="form-control" th:value="${user.about}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required></textarea>
 								<small id="emailHelp" class="form-text text-muted">Write a small description about Yourself</small>
-								<div class="invalid-feedback" th:each="e:${fields.errors('about')}" th:text="${e}" style="color: red;"></div>
+								<div class="invalid-feedback" th:each="e:${#fields.errors('about')}" th:text="${e}" style="color: red;"></div>
 							</div>
 							<div class="container text-center" >
 							<button type="submit" class="btn btnbg-primary">Submit</button>

@@ -48,7 +48,9 @@ public class SMConfig {
 			authorize.requestMatchers(mvcMatcherBuilder.pattern("/**")).permitAll().anyRequest().authenticated();
 		})
 
-				.authenticationProvider(getDaoAuthenticationProvider()).formLogin(Customizer.withDefaults());
+				.authenticationProvider(getDaoAuthenticationProvider()).formLogin(formlogin->{
+					formlogin.loginPage("/signin");
+				});
 
 		return httpSecurity.build();
 	}

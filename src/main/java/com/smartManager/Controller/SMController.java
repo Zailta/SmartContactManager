@@ -57,7 +57,7 @@ public class SMController {
 	/*
 	 * View Openers: launch Login Page
 	 */
-	@GetMapping(value = "/login")
+	@GetMapping(value = "/signin")
 	public ModelAndView openloginPage(ModelAndView modelAndView) {
 		modelAndView.addObject("title", "Login - Smart Contact Manager");
 		modelAndView.setViewName("SMLogin");

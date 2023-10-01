@@ -2,6 +2,7 @@ package com.smartManager.Controller;
 
 import org.aspectj.bridge.MessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,8 @@ import jakarta.validation.Valid;
 public class SMController {
 	@Autowired
 	private SMUserRepository smUserRepository;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	/*
 	 * View Openers: launch Home Page
@@ -74,11 +77,9 @@ public class SMController {
 				modelAndView.setViewName("SMSignUp");
 				return modelAndView;
 			}
-			if(smUserEntity.getName().equalsIgnoreCase("abc")) {
-				throw new Exception("namce cannot be abc");
-			}
 			smUserEntity.setRole("ROLE_USER");
 			smUserEntity.setEnabledStatus(true);
+			smUserEntity.setPassword(passwordEncoder.encode(smUserEntity.getPassword()));
 			SMUserEntity savedResultSet = smUserRepository.save(smUserEntity);
 			System.out.println(savedResultSet);
 			modelAndView.addObject("user", new SMUserEntity());

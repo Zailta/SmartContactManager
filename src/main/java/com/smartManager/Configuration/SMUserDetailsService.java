@@ -8,19 +8,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.smartManager.DAO.SMUserRepository;
 import com.smartManager.Entity.SMUserEntity;
 
-public class SMUserDetailsService implements UserDetailsService
-{	@Autowired
+public class SMUserDetailsService implements UserDetailsService {
+	@Autowired
 	SMUserRepository repository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		SMUserEntity findByEmail = repository.findByEmail(username);
-		if (findByEmail ==  null) {
-			
+		if (findByEmail == null) {
+
 			throw new UsernameNotFoundException("The User does not Exist in the DB");
 		}
 		SMUserDetails smUserDetails = new SMUserDetails(findByEmail);
 		return smUserDetails;
 	}
-
 }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "user")
+@RequestMapping(value = "/user")
 public class SMUserController {
 
 	public SMUserController() {
@@ -16,7 +16,7 @@ public class SMUserController {
 	@GetMapping(value = "/dashboard")
 	public ModelAndView openHomePage(ModelAndView modelAndView) {
 		modelAndView.addObject("User-DashBoard", "Home - Smart Contact Manager");
-		modelAndView.setViewName("SMUserDashboard");
+		modelAndView.setViewName("Generic/SMUserDashboard");
 		return modelAndView;
 	}
 

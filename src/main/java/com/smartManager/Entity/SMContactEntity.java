@@ -3,6 +3,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -10,7 +11,7 @@ public class SMContactEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String contactID;
+	private int contactID;
 	private String email;
 	private String name;
 	private String nickName;
@@ -18,14 +19,15 @@ public class SMContactEntity {
 	private String work;
 	private Boolean enabledStatus;
 	private String phone;
-	private String profilePicture;
+	@Lob
+	private byte[] profilePicture;
 	
 	@ManyToOne
 	private SMUserEntity user;
-	public String getContactID() {
+	public int getContactID() {
 		return contactID;
 	}
-	public void setContactID(String contactID) {
+	public void setContactID(int contactID) {
 		this.contactID = contactID;
 	}
 	public String getEmail() {
@@ -70,10 +72,10 @@ public class SMContactEntity {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getProfilePicture() {
+	public byte[] getProfilePicture() {
 		return profilePicture;
 	}
-	public void setProfilePicture(String profilePicture) {
+	public void setProfilePicture(byte[] profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 	public SMUserEntity getUser() {

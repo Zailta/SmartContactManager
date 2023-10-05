@@ -15,12 +15,12 @@
 						</div>
 						
 						<h3 class="text-center display-4">New Contact</h3>
-						<form th:action="@{/user/process-contact}" method="POST" id="addnewContact" th:object="${newContact}" enctype="multipart/form-data">
+						<form th:action="@{/user/process-contact}" method="POST" id="addnewContact" th:object="${contact}" enctype="multipart/form-data">
 							<!--for Name-->
 							<div class="form-group">
 								<label for="name">Name:</label>
 								<input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp"
-									placeholder="Enter Name" th:value="${newContact.name}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
+									placeholder="Enter Name" th:value="${contact.name}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
 									<div class="invalid-feedback" th:each="e:${#fields.errors('name')}" th:text="${e}" style="color: red;">
 											</div>
 							</div>
@@ -28,7 +28,7 @@
 							<div class="form-group" >
 								<label for="email">Email address:</label>
 								<input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
-									placeholder="Enter email" th:value="${newContact.email}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
+									placeholder="Enter email" th:value="${contact.email}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
 								<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 								<div class="invalid-feedback" th:each="e:${#fields.errors('email')}" th:text="${e}" style="color: red;"></div>
 							</div>
@@ -36,14 +36,14 @@
 							<div class="form-group">
 								<label for="nickname">Nick Name:</label>
 								<input type="text" class="form-control" name="nickName" id="nickName" aria-describedby="emailHelp"
-									placeholder="Enter Nick Name" th:value="${newContact.nickName}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
+									placeholder="Enter Nick Name" th:value="${contact.nickName}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
 								<small id="emailHelp" class="form-text text-muted">Please enter NickName</small>
 								<div class="invalid-feedback" th:each="e:${#fields.errors('nickName')}" th:text="${e}" style="color: red;"></div>
 							</div>
 							<!--for About-->
 							<div class="form-group">
 								<label for="about">About:</label>
-								<textarea name="about" id="about" cols="30" rows="5" class="form-control" th:value="${newContact.about}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required></textarea>
+								<textarea name="about" id="about" cols="30" rows="5" class="form-control" th:value="${contact.about}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required></textarea>
 								<small id="emailHelp" class="form-text text-muted">Write a small description about Yourself</small>
 								<div class="invalid-feedback" th:each="e:${#fields.errors('about')}" th:text="${e}" style="color: red;"></div>
 							</div>
@@ -51,7 +51,7 @@
 							<div class="form-group">
 								<label for="work">Work:</label>
 								<input type="text" class="form-control" name="work" id="work" aria-describedby="emailHelp"
-									placeholder="Enter Work" th:value="${newContact.work}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
+									placeholder="Enter Work" th:value="${contact.work}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
 								<small id="emailHelp" class="form-text text-muted">Please enter Work </small>
 								<div class="invalid-feedback" th:each="e:${#fields.errors('work')}" th:text="${e}" style="color: red;"></div>
 							</div>
@@ -59,18 +59,19 @@
 							<div class="form-group">
 								<label for="number">Phone Number:</label>
 								<input type="text" class="form-control" name="phone" id="phone" aria-describedby="emailHelp"
-									placeholder="Enter Phone Number" th:value="${newContact.phone}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
+									placeholder="Enter Phone Number" th:value="${contact.phone}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
 								<small id="emailHelp" class="form-text text-muted">Please enter Phone Number</small>
 								<div class="invalid-feedback" th:each="e:${#fields.errors('phone')}" th:text="${e}" style="color: red;"></div>
 							</div>
 							
 							<!--for Profile Picture-->
+							
 							<div class="form-group">
-								<label for="profile">Phone Number:</label>
-								<input type="file" class="form-control" name="profilePicture" id="profilePicture" aria-describedby="emailHelp"
-									placeholder="Add Profile Image" th:value="${newContact.profilePicture}" th:classappend="${#fields.hasErrors()?'is-invalid':''}" required>
-								<small id="emailHelp" class="form-text text-muted">Please enter Phone Number</small>
-								<div class="invalid-feedback" th:each="e:${#fields.errors('profilePicture')}" th:text="${e}" style="color: red;"></div>
+								<label for="profile">Profile Picture:</label>
+								<input  class="form-control" name="profileImage" type="file" id="profileImage" aria-describedby="emailHelp" 
+									placeholder="Add Profile Image">
+								<small id="emailHelp" class="form-text text-muted">Please add a picture</small>
+								<!--<div class="invalid-feedback" th:each="e:${#fields.errors('profilePicture')}" th:text="${e}" style="color: red;"></div>-->
 							</div>
 							<div class="container text-center" >
 							<button type="submit" class="btn btnbg-primary">Submit</button>

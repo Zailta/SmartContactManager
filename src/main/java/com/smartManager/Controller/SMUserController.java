@@ -62,8 +62,7 @@ public class SMUserController {
 	public ModelAndView processContact(ModelAndView modelAndView, @ModelAttribute SMContactEntity contact,
 			Principal principal, @RequestParam("profileImage")MultipartFile file, HttpSession session) throws IOException {
 		try {
-			if(session.getAttribute("message")!=null)
-				session.removeAttribute("message");
+			
 			SMUserEntity user = this.repository.findByEmail(principal.getName());
 			contact.setProfilePicture(file.getBytes());
 			contact.setUser(user);

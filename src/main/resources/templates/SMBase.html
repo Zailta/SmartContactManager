@@ -9,7 +9,7 @@
   </head>
   <body>
 	 <!-- Nav Bar changes Start-->
-	  <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-primary">
+	  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" th:href="@{/}">Smart Contact Manager</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
 <!-- Nav Bar changes End-->
 		<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
 			<p th:text="${session.message.content}"></p>
-			<!--<th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
+			<th:block th:text="${@SMSessionHelper.removeSessionAttribute()}"></th:block>
 </div>
 		
 	  <div th:replace="${content}"></div>  

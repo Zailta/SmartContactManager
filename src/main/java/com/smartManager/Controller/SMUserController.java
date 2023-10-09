@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.smartManager.DAO.SMContactRepository;
 import com.smartManager.DAO.SMUserRepository;
 import com.smartManager.Entity.SMContactEntity;
 import com.smartManager.Entity.SMUserEntity;
@@ -31,6 +33,8 @@ public class SMUserController {
 
 	@Autowired
 	SMUserRepository repository;
+	@Autowired
+	SMContactRepository contactRepository;
 
 	public SMUserController() {
 		// TODO Auto-generated constructor stub
@@ -45,7 +49,7 @@ public class SMUserController {
 
 	@GetMapping(value = "/dashboard")
 	public ModelAndView openHomePage(ModelAndView modelAndView) {
-		modelAndView.addObject("User-DashBoard", "Home - Smart Contact Manager");
+		modelAndView.addObject("title", "Home - Smart Contact Manager");
 		modelAndView.setViewName("Generic/SMUserDashboard");
 		return modelAndView;
 	}
@@ -53,10 +57,20 @@ public class SMUserController {
 	@GetMapping(value = "/add-contact")
 	public ModelAndView openAddContact(ModelAndView modelAndView) {
 		modelAndView.addObject("contact", new SMContactEntity());
-		modelAndView.addObject("Add-Contact", "Smart Contact Manager");
+		modelAndView.addObject("title", "Add-Contacts Smart Contact Manager");
 		modelAndView.setViewName("Generic/SMAddNewUser");
 		return modelAndView;
 	}
+	
+	@GetMapping(value = "/view-contacts")
+	public ModelAndView openViewContact(ModelAndView modelAndView, Principal principal) {
+		modelAndView.addObject("title", "Contacts - Smart Contact Manager");
+		List<SMContactEntity> findByuser = contactRepository.findByuser_userID(repository.findByEmail(principal.getName()).getUserID());
+		modelAndView.addObject("contactsList", findByuser);
+		modelAndView.setViewName("Generic/SMViewContacts");
+		return modelAndView;
+	}
+	
 
 	@PostMapping(value = "/process-contact")
 	public ModelAndView processContact(ModelAndView modelAndView, @ModelAttribute SMContactEntity contact,

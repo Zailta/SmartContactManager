@@ -1,4 +1,5 @@
 package com.smartManager.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class SMContactEntity {
 	private Boolean enabledStatus;
 	private String phone;
 	@Lob
+	@Column(columnDefinition = "LONGBLOB")
 	private byte[] profilePicture;
 	
 	@ManyToOne

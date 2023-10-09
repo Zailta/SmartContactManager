@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +69,11 @@ public class SMUserController {
 	@GetMapping(value = "/view-contacts/{pageNumber}")
 	public ModelAndView openViewContact(ModelAndView modelAndView, Principal principal, @PathVariable("pageNumber") Integer pageNumber) {
 		modelAndView.addObject("title", "Contacts - Smart Contact Manager");
-		PageRequest contactsPerPage = PageRequest.of(pageNumber, 2);
-		Page<SMContactEntity> findByuser = contactRepository.findByuser_userID(repository.findByEmail(principal.getName()).getUserID(), contactsPerPage);
+		PageRequest contactsPerPage = PageRequest.of(pageNumber, 5);
+		SMUserEntity user = repository.findByEmail(principal.getName());
+		Page<SMContactEntity> findByuser = contactRepository.findByuser_userID(user.getUserID(), contactsPerPage);
+		byte[] profilePicture = findByuser.getContent().get(0).getProfilePicture();
+		modelAndView.addObject("profile", Base64.getEncoder().encodeToString(profilePicture));
 		modelAndView.addObject("contactsList", findByuser);
 		modelAndView.addObject("pageNumber", pageNumber);
 		modelAndView.addObject("totalPages", findByuser.getTotalPages());

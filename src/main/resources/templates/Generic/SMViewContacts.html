@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 <section>
@@ -18,6 +19,7 @@
 	<table class="table">
         <thead>
           <tr>
+			  <th>Name</th>
               <th>Name</th>
               <th>Email</th>
               <th>About</th>
@@ -29,7 +31,13 @@
         <tbody>
        
           <tr th:each="contact: ${contactsList}">
-            <td th:text="${contact.name}"></td>
+            <td>
+				<div>
+					<img class="profile-pcture" th:src="@{'data:image/png;charset=utf-8;base64,' + ${profile}}" alt="profile" />
+					<span th:text="${contact.name}"></span>
+				</div>
+				
+			</td>
             <td th:text="${contact.email}"></td>
             <td th:text="${contact.about}"></td>
             <td th:text="${contact.phone}"></td>

@@ -30,7 +30,7 @@ public class SMUserEntity {
 	private String about;
 	private String role;
 	private Boolean enabledStatus;
-	private String profilePicture;
+	private byte[] profilePicture;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	private List <SMContactEntity> contacts = new ArrayList<>();
@@ -77,10 +77,10 @@ public class SMUserEntity {
 	public void setEnabledStatus(Boolean enabledStatus) {
 		this.enabledStatus = enabledStatus;
 	}
-	public String getProfilePicture() {
+	public byte[] getProfilePicture() {
 		return profilePicture;
 	}
-	public void setProfilePicture(String profilePicture) {
+	public void setProfilePicture(byte[] profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 	public List<SMContactEntity> getContacts() {

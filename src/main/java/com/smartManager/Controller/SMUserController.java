@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -78,6 +79,15 @@ public class SMUserController {
 		modelAndView.addObject("pageNumber", pageNumber);
 		modelAndView.addObject("totalPages", findByuser.getTotalPages());
 		modelAndView.setViewName("Generic/SMViewContacts");
+		return modelAndView;
+	}
+	
+	@GetMapping(value = "/view-contact/{contactID}")
+	public ModelAndView openIndividualView(ModelAndView modelAndView, @PathVariable("contactID") Integer contactID) {
+		Optional<SMContactEntity> findById = contactRepository.findById(contactID);
+		modelAndView.addObject("contact", findById.get());
+		modelAndView.addObject("profile", Base64.getEncoder().encodeToString(findById.get().getProfilePicture()));
+		modelAndView.setViewName("Generic/SMViewSingleContact");
 		return modelAndView;
 	}
 	

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{Generic/SMBase::layout(~{::section})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+	<section>
+		<div class="container mr-3">
+			<div class="container-fluid mt-1">
+				<div class="row">
+					<div class="col-md-10 offset-md-1">
+						
+
+						
+						<table class="table">
+
+							<tbody>
+
+								<tr>
+									
+										<div th:if="${profile!=null}" class="container text-center">
+											<img class="Ind-profile-pcture"
+												th:src="@{'data:image/png;charset=utf-8;base64,' + ${profile}}"
+												alt="profile" />
+										</div>
+									
+								</tr>
+								
+								<br/>
+								<h4 class="text-center display-4" th:text="${contact.name}+' ('+${contact.nickName}+')'"></h4>
+								<br/>
+								
+								<tr>
+									<td>Email</td>
+									<td th:text="${contact.email}"></td>
+								</tr>
+								<tr>
+									<td>About</td>
+									<td th:text="${contact.about}"></td>
+								</tr>
+								<tr>
+									<td>Phone Number</td>
+									<td th:text="${contact.phone}"></td>
+								</tr>
+								
+								<tr>
+									<td>Work</td>
+									<td th:text="${contact.work}"></td>
+								</tr>
+
+
+
+
+
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+
+</html>

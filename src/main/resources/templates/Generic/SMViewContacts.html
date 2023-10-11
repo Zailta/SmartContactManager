@@ -20,7 +20,6 @@
         <thead>
           <tr>
 			  <th>Name</th>
-              <th>Name</th>
               <th>Email</th>
               <th>About</th>
               <th>Phone Number</th>
@@ -32,11 +31,12 @@
        
           <tr th:each="contact: ${contactsList}">
             <td>
-				<div>
+				<a th:href="@{'/user/view-contact/'+${contact.contactID}}">
+				<div th:if="${profile!=null}">
 					<img class="profile-pcture" th:src="@{'data:image/png;charset=utf-8;base64,' + ${profile}}" alt="profile" />
 					<span th:text="${contact.name}"></span>
 				</div>
-				
+				</a>
 			</td>
             <td th:text="${contact.email}"></td>
             <td th:text="${contact.about}"></td>

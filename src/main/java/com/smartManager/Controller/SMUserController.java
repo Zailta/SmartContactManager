@@ -83,10 +83,12 @@ public class SMUserController {
 	}
 	
 	@GetMapping(value = "/view-contact/{contactID}")
-	public ModelAndView openIndividualView(ModelAndView modelAndView, @PathVariable("contactID") Integer contactID) {
+	public ModelAndView openIndividualView(ModelAndView modelAndView, @PathVariable("contactID") Integer contactID, Principal principal) {
 		Optional<SMContactEntity> findById = contactRepository.findById(contactID);
+		if(principal.getName().equals(findById.get().getUser().getEmail())) {
 		modelAndView.addObject("contact", findById.get());
 		modelAndView.addObject("profile", Base64.getEncoder().encodeToString(findById.get().getProfilePicture()));
+		}
 		modelAndView.setViewName("Generic/SMViewSingleContact");
 		return modelAndView;
 	}

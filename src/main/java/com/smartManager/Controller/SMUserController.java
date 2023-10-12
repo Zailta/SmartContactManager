@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.smartManager.DAO.SMContactRepository;
 import com.smartManager.DAO.SMUserRepository;
@@ -91,6 +92,24 @@ public class SMUserController {
 		}
 		modelAndView.setViewName("Generic/SMViewSingleContact");
 		return modelAndView;
+	}
+	
+	@GetMapping(value = "/delete/{contactID}")
+	public RedirectView deleteUser(@PathVariable("contactID") Integer contactID, Principal principal, HttpSession session) {
+		Optional<SMContactEntity> findById = contactRepository.findById(contactID);
+		if(principal.getName().equals(findById.get().getUser().getEmail())) {
+			SMContactEntity smContactEntity = findById.get();
+			smContactEntity.setUser(null);
+			contactRepository.delete(findById.get());
+			session.setAttribute("message", new SMMessageHandler("Contact Deleted Succesfully! ", "alert-success"));
+		}else {
+			session.setAttribute("message", new SMMessageHandler("You don't have delete priveleges for this contact! ", "alert-danger"));
+		}
+		
+		
+		
+		
+		return new RedirectView("/user/view-contacts/0");
 	}
 	
 

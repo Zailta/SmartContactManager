@@ -42,8 +42,8 @@
             <td th:text="${contact.about}"></td>
             <td th:text="${contact.phone}"></td>
             <td th:text="${contact.nickName}"></td>
-            <td> <a href="delete/${ue.getUserName()}"><i class="fa-solid fa-trash"></i></a></td>
-            <td> <a href="updatePage/${ue.getUserName()}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+            <td> <a th:href="@{'/user/delete/'+${contact.contactID}}"><i class="fa-solid fa-trash"></i></a></td>
+            <td> <a th:href="@{'/user/update/'+${contact.contactID}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
           </tr>
 
         </tbody>

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.smartManager.DAO.SMContactRepository;
@@ -109,7 +110,7 @@ public class SMUserController {
 		
 		
 		
-		return new RedirectView("/user/view-contacts/0");
+		return new RedirectView(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/user/view-contacts/0");
 	}
 	
 

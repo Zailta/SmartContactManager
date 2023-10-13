@@ -29,8 +29,8 @@
 												alt="profile" />
 										</div>
 										<div class="form-group">
-								<input th:value="${contact.profilePicture}" class="form-control" name="profileImage" type="file" id="profileImage" aria-describedby="emailHelp" 
-									placeholder="update Profile Image" required>
+								<input class="form-control" name="profileImage" type="file" id="profileImage" aria-describedby="emailHelp" 
+									placeholder="update Profile Image" >
 								</div>
 
 									</tr>
@@ -87,7 +87,8 @@
 
 								</tbody>
 								<tr>
-
+									<input th:value="${contact.contactID}" type="hidden" class="form-control"
+												name="contactID" id="contactID" aria-describedby="emailHelp" />
 										<td><button type="submit" class="btn btnbg-primary">Submit</button></td>
 
 									</tr>

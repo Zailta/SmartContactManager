@@ -126,6 +126,27 @@ public class SMUserController {
 		return modelAndView;
 	}
 	
+	@PostMapping(value = "/update-user")
+	public RedirectView processUpdateForm(@ModelAttribute SMContactEntity contactEntity, @RequestParam("profileImage")MultipartFile file, HttpSession session) {
+		Optional<SMContactEntity> findById = contactRepository.findById(contactEntity.getContactID());
+		if(file.isEmpty()) {
+			byte[] profilePicture = findById.get().getProfilePicture();
+			contactEntity.setProfilePicture(profilePicture);
+		}
+		else {
+			try {
+				contactEntity.setProfilePicture(file.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		contactEntity.setUser(findById.get().getUser());
+		this.contactRepository.save(contactEntity);
+		session.setAttribute("message", new SMMessageHandler("Contact Updated Succesfully! ", "alert-success"));
+		return new RedirectView(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/user/update/"+contactEntity.getContactID());
+	}
+	
 
 	@PostMapping(value = "/process-contact")
 	public ModelAndView processContact(ModelAndView modelAndView, @ModelAttribute SMContactEntity contact,

@@ -106,11 +106,24 @@ public class SMUserController {
 		}else {
 			session.setAttribute("message", new SMMessageHandler("You don't have delete priveleges for this contact! ", "alert-danger"));
 		}
-		
-		
-		
-		
+	
 		return new RedirectView(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/user/view-contacts/0");
+	}
+	
+	//open the update page:
+	@GetMapping(value = "/update/{contactID}")
+	public ModelAndView updateUser(ModelAndView modelAndView, @PathVariable("contactID") Integer contactID, Principal principal, HttpSession session) {
+		Optional<SMContactEntity> findById = contactRepository.findById(contactID);
+		if(principal.getName().equals(findById.get().getEmail())) {
+			modelAndView.addObject("contact",findById.get());
+			modelAndView.addObject("profile", Base64.getEncoder().encodeToString(findById.get().getProfilePicture()));
+			modelAndView.setViewName("Generic/SMUpdateSingleUser");
+		}
+		else {
+			session.setAttribute("message", new SMMessageHandler("You don't have update priveleges for this contact! ", "alert-danger"));
+		}
+		
+		return modelAndView;
 	}
 	
 

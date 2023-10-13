@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{Generic/SMBase::layout(~{::section})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+	<section>
+		<div class="container mr-3">
+			<div class="container-fluid mt-1" th:if="${contact}">
+				<div class="row">
+					<div class="col-md-10 offset-md-1">
+
+						<form th:action="@{/user/update-user}" method="POST" id="updateContact" th:object="${contact}"
+							enctype="multipart/form-data">
+
+							<table class="table">
+
+								<tbody>
+
+									<tr>
+
+										<div th:if="${profile!=null}" class="container text-center">
+											<img class="Ind-profile-pcture"
+												th:src="@{'data:image/png;charset=utf-8;base64,' + ${profile}}"
+												alt="profile" />
+										</div>
+										<div class="form-group">
+								<input th:value="${contact.profilePicture}" class="form-control" name="profileImage" type="file" id="profileImage" aria-describedby="emailHelp" 
+									placeholder="update Profile Image" required>
+								</div>
+
+									</tr>
+
+									<br />
+									<h4 class="text-center display-4"><span>
+											<input th:value="${contact.name}" type="text" class="form-control"
+												name="name" id="name" aria-describedby="emailHelp"  required/></span></h4>
+									<br />
+
+									<tr>
+										<td>Email</td>
+
+										<td>
+											<input th:value="${contact.email}" type="text" class="form-control"
+												name="email" id="email" aria-describedby="emailHelp" required/></span></h4>
+										</td>
+									</tr>
+									<tr>
+										<td>About</td>
+										<td>
+											<input th:value="${contact.about}" type="text" class="form-control"
+												name="about" id="about" aria-describedby="emailHelp" required /></span></h4>
+
+										</td>
+									</tr>
+									<tr>
+										<td>Phone Number</td>
+										<td>
+											<input th:value="${contact.phone}" type="text" class="form-control"
+												name="phone" id="phone" aria-describedby="emailHelp" required/></span></h4>
+
+										</td>
+									</tr>
+
+									<tr>
+										<td>Work</td>
+										<td>
+											<input th:value="${contact.work}" type="text" class="form-control"
+												name="work" id="work" aria-describedby="emailHelp" required/></span></h4>
+
+										</td>
+									</tr>
+									<tr>
+										<td>Nick-Name</td>
+										<td>
+											<input th:value="${contact.nickName}" type="text" class="form-control"
+												name="nickName" id="nickName" aria-describedby="emailHelp" /></span>
+											</h4>
+
+										</td>
+									</tr>
+									
+
+								</tbody>
+								<tr>
+
+										<td><button type="submit" class="btn btnbg-primary">Submit</button></td>
+
+									</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+			<h3 class="text-centers" th:unless="${contact}"> You do not have Permission to update this Contact</h3>
+		</div>
+
+	</section>
+</body>
+
+</html>

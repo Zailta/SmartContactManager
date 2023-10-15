@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{SMBase::layout(~{::section})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{Generic/SMBase::layout(~{::section})}">
 <head>
 	<meta charset="UTF-8" />
 	<title>Document</title>
@@ -14,7 +14,7 @@
 							<img style="width: 80px;" th:src="@{/img/password.png}" alt="" />
 							</div>
 							
-							<h3 class="text-center display-4">Send Email!</h3>
+							<h3 class="text-center display-4">Send Contact as Email!</h3>
 							
 							<form th:action="@{/user/invoke-email}" method="POST" id="loginForm" th:object="${contact}">
 								

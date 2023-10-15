@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{SMBase::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="my-card">
+						<div class="container text-center">
+							<img style="width: 80px;" th:src="@{/img/password.png}" alt="" />
+							</div>
+							
+							<h3 class="text-center display-4">Send Email!</h3>
+							
+							<form th:action="@{/user/invoke-email}" method="POST" id="loginForm" th:object="${contact}">
+								
+							<!--for To-->
+							<div class="form-group">
+								<label for="email">To:</label>
+								<input type="email" class="form-control" name="to" id="to" aria-describedby="emailHelp"
+									placeholder="Enter To" required>
+								<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+								<input th:value="${contact.contactID}" type="hidden" class="form-control"
+												name="contactID" id="contactID" aria-describedby="emailHelp" />
+							</div>
+							<!--for From-->
+							<div class="form-group">
+								<label for="email">From:</label>
+								<input  th:value="${useremail}" type="email" class="form-control" name="from" id="from" aria-describedby="emailHelp"
+									placeholder="Enter From"  required readonly>
+								
+							
+							</div>
+							<br />
+							<div class="form-group" >
+							<button type="submit" class="btn btnbg-primary">Send mail</button>
+							</div>
+							
+							</form>
+						</div>
+						</div>
+						</div>
+						</div>
+						
+	</section>
+</body>
+</html>

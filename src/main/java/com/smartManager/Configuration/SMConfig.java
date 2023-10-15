@@ -49,7 +49,7 @@ public class SMConfig {
 		})
 
 				.authenticationProvider(getDaoAuthenticationProvider()).formLogin(formlogin->{
-					formlogin.loginPage("/signin").loginProcessingUrl("/signin").defaultSuccessUrl("/user/dashboard");
+					formlogin.loginPage("/signin").loginProcessingUrl("/signin").defaultSuccessUrl("/user/view-contacts/0");
 				});
 
 		return httpSecurity.build();

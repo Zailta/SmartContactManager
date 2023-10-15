@@ -44,6 +44,7 @@
             <td th:text="${contact.nickName}"></td>
             <td> <a th:href="@{'/user/delete/'+${contact.contactID}}"><i class="fa-solid fa-trash"></i></a></td>
             <td> <a th:href="@{'/user/update/'+${contact.contactID}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+            <td> <a th:href="@{'/user/email/'+${contact.contactID}}"><i class="fa-solid fa-envelope"></i></a></td>
           </tr>
 
         </tbody>

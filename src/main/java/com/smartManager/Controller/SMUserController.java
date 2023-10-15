@@ -54,12 +54,6 @@ public class SMUserController {
 		modelAndView.addObject("user", findByEmail);
 	}
 
-	@GetMapping(value = "/dashboard")
-	public ModelAndView openHomePage(ModelAndView modelAndView) {
-		modelAndView.addObject("title", "Home - Smart Contact Manager");
-		modelAndView.setViewName("Generic/SMUserDashboard");
-		return modelAndView;
-	}
 
 	@GetMapping(value = "/add-contact")
 	public ModelAndView openAddContact(ModelAndView modelAndView) {
@@ -107,7 +101,7 @@ public class SMUserController {
 			session.setAttribute("message", new SMMessageHandler("You don't have delete priveleges for this contact! ", "alert-danger"));
 		}
 	
-		return new RedirectView(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/user/view-contacts/0");
+		return new RedirectView(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/view-contacts/0");
 	}
 	
 	//open the update page:
@@ -145,6 +139,25 @@ public class SMUserController {
 		this.contactRepository.save(contactEntity);
 		session.setAttribute("message", new SMMessageHandler("Contact Updated Succesfully! ", "alert-success"));
 		return new RedirectView(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+"/user/update/"+contactEntity.getContactID());
+	}
+	
+	@GetMapping(value = "/email/{contactID}")
+	public ModelAndView sendEmail(ModelAndView modelAndView, @PathVariable("contactID") Integer contactID, Principal principal, HttpSession session) {
+		Optional<SMContactEntity> findById = contactRepository.findById(contactID);
+		if(principal.getName().equals(findById.get().getEmail())) {
+			modelAndView.addObject("contact",findById.get());
+			modelAndView.addObject("useremail",principal.getName());
+			modelAndView.setViewName("Generic/SMEmailForm");
+		}
+		else {
+			session.setAttribute("message", new SMMessageHandler("You don't have Email priveleges for this contact! ", "alert-danger"));
+		}
+		return modelAndView;
+	}
+	@PostMapping(value = "/invoke-email")
+	public ModelAndView processEmail(ModelAndView modelAndView, @RequestParam("contactID") Integer contactID, Principal principal, HttpSession session) {
+		
+		return modelAndView;
 	}
 	
 

@@ -77,13 +77,13 @@ public class SMController {
 	//Execution Commands:
 	
 
-	@PostMapping(value="/token")
+	@GetMapping(value="/token")
 	public void generateAccessToken() {
 		 String userName = "azameap@gmail.com";
 		 String password = passwordEncoder.encode("Redemption#@1");
 		 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, password));
 		 UserDetails loadUserByUsername = userDetailsService.loadUserByUsername(userName);
-		 String token = jwtHelper.generateToken(loadUserByUsername);
+		 String token = jwtHelper.generateToken(loadUserByUsername.getUsername());
 		 System.out.println("----------------------------------------------------------------"+token);
 	}
 	

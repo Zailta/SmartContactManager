@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -37,10 +37,11 @@ public class SMConfig {
 		return authenticationProvider;
 	}
 	
-	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-	    return http.getSharedObject(AuthenticationManagerBuilder.class).build();
-	}
+	 @Bean
+	    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception { 
+	        return config.getAuthenticationManager(); 
+	    } 
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector)
 			throws Exception {
@@ -56,9 +57,12 @@ public class SMConfig {
 		}).sessionManagement(sessionManagement ->{
 			sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		})
-		.authenticationProvider(getDaoAuthenticationProvider()).formLogin(formlogin->{
-					formlogin.loginPage("/signin").loginProcessingUrl("/signin").defaultSuccessUrl("/user/view-contacts/0");
-				});
+				.authenticationProvider(
+						getDaoAuthenticationProvider())/*
+														 * .formLogin(formlogin->{
+														 * formlogin.loginPage("/signin").loginProcessingUrl("/signin").
+														 * defaultSuccessUrl("/user/view-contacts/0"); })
+														 */;
 
 		return httpSecurity.build();
 	}

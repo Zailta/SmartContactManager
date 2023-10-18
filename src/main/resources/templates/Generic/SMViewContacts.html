@@ -14,7 +14,13 @@
 						<div class="container text-center">
 							<img style="width: 60px;" th:src="@{/img/contacts.png}" alt="" />
 						</div>
-						
+						<br />
+						<div class="search-container my4">
+							<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search Contact" />
+							<div class="search-results">
+								
+							</div>
+						</div>
 						<h3 class="text-center display-4">Your Contacts</h3>
 	<table class="table">
         <thead>

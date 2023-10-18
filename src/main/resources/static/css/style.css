@@ -84,3 +84,15 @@ body{
 	border-radius: 0%;
 	
 }
+.search-container{
+	position: relative;
+	
+}
+.search-results{
+	position:absolute;
+	background: #FFFFFF;
+	width: 100%;
+	padding: 10px;
+	border: 1 px solid #fbdd74;
+	display: none;
+}

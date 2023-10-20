@@ -36,12 +36,8 @@ public class SMConfig {
 		authenticationProvider.setPasswordEncoder(getPasswordEncoder());
 		return authenticationProvider;
 	}
-	
-	 @Bean
-	    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception { 
-	        return config.getAuthenticationManager(); 
-	    } 
 
+	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector)
 			throws Exception {
@@ -53,16 +49,10 @@ public class SMConfig {
 			authorize.requestMatchers(mvcMatcherBuilder.pattern("/user/**")).hasRole("USER");
 
 		}).authorizeHttpRequests(authorize -> {
-			authorize.requestMatchers(mvcMatcherBuilder.pattern("/token")).permitAll().anyRequest().authenticated();
-		}).sessionManagement(sessionManagement ->{
-			sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		})
-				.authenticationProvider(
-						getDaoAuthenticationProvider())/*
-														 * .formLogin(formlogin->{
-														 * formlogin.loginPage("/signin").loginProcessingUrl("/signin").
-														 * defaultSuccessUrl("/user/view-contacts/0"); })
-														 */;
+			authorize.requestMatchers(mvcMatcherBuilder.pattern("/**")).permitAll().anyRequest().authenticated();
+		}).authenticationProvider(getDaoAuthenticationProvider()).formLogin(formlogin -> {
+			formlogin.loginPage("/signin").loginProcessingUrl("/signin").defaultSuccessUrl("/user/view-contacts/0");
+		});
 
 		return httpSecurity.build();
 	}

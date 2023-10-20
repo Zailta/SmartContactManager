@@ -35,7 +35,6 @@ import com.smartManager.DAO.SMContactRepository;
 import com.smartManager.DAO.SMUserRepository;
 import com.smartManager.Entity.SMContactEntity;
 import com.smartManager.Entity.SMUserEntity;
-import com.smartManager.Helper.JWTHelper;
 import com.smartManager.Helper.SMMessageHandler;
 
 import jakarta.servlet.http.HttpSession;

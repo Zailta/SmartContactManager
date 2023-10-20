@@ -1,10 +1,7 @@
 package com.smartManager.Controller;
 
-import org.aspectj.bridge.MessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.smartManager.Configuration.SMUserDetailsService;
 import com.smartManager.DAO.SMUserRepository;
 import com.smartManager.Entity.SMUserEntity;
-import com.smartManager.Helper.JWTHelper;
 import com.smartManager.Helper.SMMessageHandler;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,12 +23,7 @@ public class SMController {
 	private SMUserRepository smUserRepository;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	@Autowired
-	private AuthenticationManager authenticationManager;
-	@Autowired
-	private JWTHelper jwtHelper;
-	@Autowired
-	private SMUserDetailsService userDetailsService;
+
 	/*
 	 * View Openers: launch Home Page
 	 */
@@ -75,17 +65,6 @@ public class SMController {
 	}
 	
 	//Execution Commands:
-	
-
-	@GetMapping(value="/token")
-	public void generateAccessToken() {
-		 String userName = "azameap@gmail.com";
-		 String password = passwordEncoder.encode("Redemption#@1");
-		 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, password));
-		 UserDetails loadUserByUsername = userDetailsService.loadUserByUsername(userName);
-		 String token = jwtHelper.generateToken(loadUserByUsername.getUsername());
-		 System.out.println("----------------------------------------------------------------"+token);
-	}
 	
 	@PostMapping(value = "/register")
 	public ModelAndView loginFormValidation(@Valid @ModelAttribute("user") SMUserEntity smUserEntity,BindingResult bindingResult, HttpSession session) {

@@ -17,7 +17,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +51,8 @@ public class SMUserController {
 	SMContactRepository contactRepository;
 	@Autowired
 	JavaMailSender javaMailSender;
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public SMUserController() {
 		// TODO Auto-generated constructor stub
@@ -70,6 +74,12 @@ public class SMUserController {
 		return modelAndView;
 	}
 	
+	@GetMapping(value = "/open-settings")
+	public ModelAndView openSettings(ModelAndView modelAndView) {
+		modelAndView.addObject("title", "Change-Password Smart Contact Manager");
+		modelAndView.setViewName("Generic/SMChangePassword");
+		return modelAndView;
+	}
 	@GetMapping(value = "/view-contacts/{pageNumber}")
 	public ModelAndView openViewContact(ModelAndView modelAndView, Principal principal, @PathVariable("pageNumber") Integer pageNumber) {
 		modelAndView.addObject("title", "Contacts - Smart Contact Manager");
@@ -216,6 +226,27 @@ public class SMUserController {
 		return modelAndView;
 	}
 	
+	@PostMapping(value = "/change-password")
+	
+	public ModelAndView changePassword(ModelAndView modelAndView, Principal principal, @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, HttpSession session) {
+		
+		String name = principal.getName();
+		SMUserEntity userEntity = repository.findByEmail(name);
+		if(bCryptPasswordEncoder.matches(oldPassword, userEntity.getPassword())) {
+			
+			userEntity.setPassword(bCryptPasswordEncoder.encode(newPassword));
+			repository.save(userEntity);
+			modelAndView.setViewName("Generic/SMChangePassword");
+			session.setAttribute("message", new SMMessageHandler("Passwod Changed Successfully", "alert-success"));
+		}
+		else {
+			modelAndView.setViewName("Generic/SMChangePassword");
+			session.setAttribute("message", new SMMessageHandler("The Old Password did not match", "alert-danger"));
+		}
+		
+		return modelAndView;
+	}
+	
 	@PostMapping(value = "/process-contact")
 	public ModelAndView processContact(ModelAndView modelAndView, @ModelAttribute SMContactEntity contact,
 			Principal principal, @RequestParam("profileImage")MultipartFile file, HttpSession session) throws IOException {
@@ -241,5 +272,6 @@ public class SMUserController {
 		}
 		
 	}
-
+	
+	
 }

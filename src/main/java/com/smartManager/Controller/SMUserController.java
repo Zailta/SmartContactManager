@@ -10,6 +10,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
+import javax.naming.Binding;
+
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -20,6 +22,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,6 +74,14 @@ public class SMUserController {
 		modelAndView.addObject("contact", new SMContactEntity());
 		modelAndView.addObject("title", "Add-Contacts Smart Contact Manager");
 		modelAndView.setViewName("Generic/SMAddNewUser");
+		return modelAndView;
+	}
+	
+	@GetMapping(value = "/dashboard")
+	public ModelAndView openDashboard(ModelAndView modelAndView) {
+		modelAndView.addObject("contact", new SMContactEntity());
+		modelAndView.addObject("title", "DashBoard - Smart Contact Manager");
+		modelAndView.setViewName("Generic/SMUserDashboard");
 		return modelAndView;
 	}
 	
@@ -270,6 +281,21 @@ public class SMUserController {
 			return modelAndView;
 			
 		}
+		
+	}
+	
+	@PostMapping(value = "/process-csv")
+	
+	public ModelAndView processCSVforBulkUpload(ModelAndView modelAndView, Principal principal, @RequestParam("csv")MultipartFile file, HttpSession session, BindingResult bindingResult) throws Exception {
+		String contentType = file.getContentType();
+		System.out.println(contentType);
+		if(file.isEmpty() || bindingResult.hasErrors()) {
+			session.setAttribute("message", new SMMessageHandler("Something went Wrong!!", "alert-danger"));
+			modelAndView.setViewName("Generic/SMUserDashboard");
+			return modelAndView;
+			
+		}
+		return modelAndView;
 		
 	}
 	

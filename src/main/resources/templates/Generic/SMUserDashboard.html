@@ -6,7 +6,39 @@
 </head>
 <body>
 	<section>
-		
-	</section>
+	<div class="container mr-3">
+			<div class="container-fluid mt-1">
+				<div class="row">
+					<div class="col-md-10 offset-md-1">
+						<div class="container text-center">
+							<img style="width: 60px;" th:src="@{/img/contacts.png}" alt="" />
+						</div>
+						
+						<h3 class="text-center display-4">Bulk Upload</h3>
+						<br />
+						<br />
+						<br />
+						<form th:action="@{/user/process-csv}" method="POST" id="bulkupload" th:object="${contact}" enctype="multipart/form-data">
+							<!--for Name-->
+							
+							<!--for upload CSV Picture-->
+							
+							<div class="form-group">
+								<label for="profile">Profile Picture:</label>
+								<input  class="form-control" name="csv" type="file" id="csv" aria-describedby="emailHelp" 
+									placeholder="Add Profile Image">
+								<small id="emailHelp" class="form-text text-muted">Please add a picture</small>
+								<!--<div class="invalid-feedback" th:each="e:${#fields.errors('profilePicture')}" th:text="${e}" style="color: red;"></div>-->
+							</div>
+							<div class="container text-center" >
+							<button type="submit" class="btn btnbg-primary">Submit</button>
+							<button type="reset"class="btn btnbg-tertiary">Reset</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
 </body>
 </html>

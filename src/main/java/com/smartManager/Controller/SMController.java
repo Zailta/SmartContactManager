@@ -74,8 +74,6 @@ public class SMController {
 			  if(session.getAttribute("message")!=null) 
 				  session.removeAttribute("message");
 			 
-			if(smUserEntity.getName().equalsIgnoreCase("abc"))
-				throw new Exception("not valid");
 			if (bindingResult.hasErrors()) {
 				modelAndView.setViewName("SMSignUp");
 				return modelAndView;

@@ -51,7 +51,7 @@ public class SMConfig {
 		}).authorizeHttpRequests(authorize -> {
 			authorize.requestMatchers(mvcMatcherBuilder.pattern("/**")).permitAll().anyRequest().authenticated();
 		}).authenticationProvider(getDaoAuthenticationProvider()).formLogin(formlogin -> {
-			formlogin.loginPage("/signin").loginProcessingUrl("/signin").defaultSuccessUrl("/user/view-contacts/0");
+			formlogin.loginPage("/signin").loginProcessingUrl("/signin").defaultSuccessUrl("/user/dashboard");
 		});
 
 		return httpSecurity.build();
